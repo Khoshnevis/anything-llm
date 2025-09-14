@@ -29,16 +29,12 @@ export default function Sidebar() {
     hideModal: hideNewWsModal,
   } = useNewWorkspaceModal();
   const { t } = useTranslation();
-  const SIDEBAR_WIDTH = "clamp(260px, 22vw, 360px)";
 
   return (
     <>
       <div
         style={{
-          // Outer width = inner width + margins (32px) + padding (20px) + border (4px)
-          width: showSidebar
-            ? `calc(${SIDEBAR_WIDTH} + 56px)`
-            : "0px",
+          width: showSidebar ? "380px" : "0px",
           ...(showSidebar
             ? { paddingLeft: "0px", paddingRight: "0px" }
             : isRtl
@@ -47,13 +43,8 @@ export default function Sidebar() {
         }}
         className="relative z-[30] transition-all duration-500 overflow-hidden"
       >
-        <div className="flex shrink-0 w-full justify-center my-[18px] px-[16px]">
-          <div
-            className={`flex items-center ${
-              isRtl ? "flex-row-reverse justify-between" : "justify-between"
-            }`}
-            style={{ width: SIDEBAR_WIDTH, minWidth: SIDEBAR_WIDTH }}
-          >
+        <div className="flex shrink-0 w-full justify-center my-[18px]">
+          <div className={`flex items-center w-[250px] min-w-[250px] ${isRtl ? "flex-row-reverse justify-between" : "justify-between"}`}>
             <Link to={paths.home()} aria-label="Home" className={`${isRtl ? "order-1" : "order-none"}`}>
               <img
                 src={logo}
@@ -73,10 +64,9 @@ export default function Sidebar() {
         </div>
         <div
           ref={sidebarRef}
-          className={`relative z-[30] rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border light:border-none p-[10px] h-[calc(100%-76px)] ${
+          className={`relative z-[30] rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border light:border-none min-w-[250px] p-[10px] h-[calc(100%-76px)] ${
             showSidebar ? "m-[16px]" : "m-0"
           }`}
-          style={{ width: SIDEBAR_WIDTH, minWidth: SIDEBAR_WIDTH }}
         >
           <div className="flex flex-col h-full overflow-x-hidden">
             <div className="flex-grow flex flex-col min-w-[235px]">
