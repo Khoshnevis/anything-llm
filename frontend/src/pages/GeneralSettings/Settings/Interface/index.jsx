@@ -3,7 +3,7 @@ import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 import LanguagePreference from "../components/LanguagePreference";
 import ThemePreference from "../components/ThemePreference";
-import { MessageDirection } from "../components/MessageDirection";
+// import { MessageDirection } from "../components/MessageDirection"; // disabled per request
 
 export default function InterfaceSettings() {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export default function InterfaceSettings() {
           </div>
           <ThemePreference />
           <LanguagePreference />
-          <MessageDirection />
+          {/* <MessageDirection /> */}
         </div>
       </div>
     </div>

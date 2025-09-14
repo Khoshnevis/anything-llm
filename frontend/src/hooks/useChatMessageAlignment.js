@@ -6,31 +6,40 @@ const ALIGNMENT_STORAGE_KEY = "anythingllm-chat-message-alignment";
  * @returns {{msgDirection: 'left'|'left_right', setMsgDirection: (direction: string) => void, getMessageAlignment: (role: string) => string}} - The message direction and the class name for the direction.
  */
 export function useChatMessageAlignment() {
-  const [msgDirection, setMsgDirection] = useState(
-    () => localStorage.getItem(ALIGNMENT_STORAGE_KEY) ?? "left"
-  );
+  // NOTE: Alignment setting is intentionally disabled.
+  // Default the alignment to left and ignore any toggles.
+  const [msgDirection, setMsgDirection] = useState("left");
 
+  // Persist a stable default (left) and comment out dynamic storage.
   useEffect(() => {
-    if (msgDirection) localStorage.setItem(ALIGNMENT_STORAGE_KEY, msgDirection);
-  }, [msgDirection]);
+    try {
+      localStorage.setItem(ALIGNMENT_STORAGE_KEY, "left");
+    } catch (e) {
+      // no-op
+    }
+  }, []);
 
-  const getMessageAlignment = useCallback(
-    (role) => {
-      if (msgDirection !== "left_right") return "";
+  // Always return no alignment override (keeps messages left-aligned in current layout).
+  const getMessageAlignment = useCallback(() => "", []);
 
-      // Respect the current document direction (LTR / RTL)
-      const isRtl =
-        typeof document !== "undefined" &&
-        document?.documentElement?.getAttribute("dir") === "rtl";
-
-      // In LTR we want the USER message on the right (reverse order).
-      // In RTL we want the ASSISTANT message on the left (reverse order).
-      const shouldReverse = isRtl ? role === "assistant" : role === "user";
-
-      return shouldReverse ? "flex-row-reverse" : "";
-    },
-    [msgDirection]
-  );
+  // --- Previous dynamic behavior (commented out by request) ---
+  // const [msgDirection, setMsgDirection] = useState(
+  //   () => localStorage.getItem(ALIGNMENT_STORAGE_KEY) ?? "left"
+  // );
+  // useEffect(() => {
+  //   if (msgDirection) localStorage.setItem(ALIGNMENT_STORAGE_KEY, msgDirection);
+  // }, [msgDirection]);
+  // const getMessageAlignment = useCallback(
+  //   (role) => {
+  //     if (msgDirection !== "left_right") return "";
+  //     const isRtl =
+  //       typeof document !== "undefined" &&
+  //       document?.documentElement?.getAttribute("dir") === "rtl";
+  //     const shouldReverse = isRtl ? role === "assistant" : role === "user";
+  //     return shouldReverse ? "flex-row-reverse" : "";
+  //   },
+  //   [msgDirection]
+  // );
 
   return {
     msgDirection,
