@@ -2,8 +2,24 @@ import React from "react";
 import SettingsButton from "../SettingsButton";
 import { isMobile } from "react-device-detect";
 import { Tooltip } from "react-tooltip";
-import { Keyboard } from "@phosphor-icons/react";
+import { Keyboard, House, Gear, Globe, GithubLogo, Book, LinkSimple, ChatCircleText, Envelope, Info, Question, Plus } from "@phosphor-icons/react";
 import { KEYBOARD_SHORTCUTS_HELP_EVENT } from "@/utils/keyboardShortcuts";
+
+// Export a set of selectable footer icons for customization UIs
+export const ICON_COMPONENTS = {
+  Plus,
+  Keyboard,
+  House,
+  Gear,
+  Globe,
+  GithubLogo,
+  Book,
+  LinkSimple,
+  ChatCircleText,
+  Envelope,
+  Info,
+  Question,
+};
 
 export default function Footer() {
   return (
