@@ -70,12 +70,23 @@ export function useSidebarToggle() {
 export function ToggleSidebarButton({ showSidebar, setShowSidebar }) {
   const isMac = navigator.userAgent.includes("Mac");
   const shortcut = isMac ? "⌘ + Shift + S" : "Ctrl + Shift + S";
+  const isRtl =
+    typeof document !== "undefined" &&
+    document?.documentElement?.getAttribute("dir") === "rtl";
 
   return (
     <>
       <button
         type="button"
-        className={`hidden md:block border-none bg-transparent outline-none ring-0 transition-left duration-500 ${showSidebar ? "left-[247px]" : "absolute top-[20px] left-[30px] z-10"}`}
+        className={`hidden md:block border-none bg-transparent outline-none ring-0 duration-500 ${
+          isRtl ? "transition-[right]" : "transition-[left]"
+        } ${
+          showSidebar
+            ? isRtl
+              ? "right-[247px]"
+              : "left-[247px]"
+            : `absolute top-[20px] ${isRtl ? "right-[30px]" : "left-[30px]"} z-10`
+        }`}
         onClick={() => setShowSidebar((prev) => !prev)}
         data-tooltip-id="sidebar-toggle"
         data-tooltip-content={
