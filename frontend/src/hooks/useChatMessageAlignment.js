@@ -16,8 +16,18 @@ export function useChatMessageAlignment() {
 
   const getMessageAlignment = useCallback(
     (role) => {
-      const isLeftToRight = role === "user" && msgDirection === "left_right";
-      return isLeftToRight ? "flex-row-reverse" : "";
+      if (msgDirection !== "left_right") return "";
+
+      // Respect the current document direction (LTR / RTL)
+      const isRtl =
+        typeof document !== "undefined" &&
+        document?.documentElement?.getAttribute("dir") === "rtl";
+
+      // In LTR we want the USER message on the right (reverse order).
+      // In RTL we want the ASSISTANT message on the left (reverse order).
+      const shouldReverse = isRtl ? role === "assistant" : role === "user";
+
+      return shouldReverse ? "flex-row-reverse" : "";
     },
     [msgDirection]
   );
