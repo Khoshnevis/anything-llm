@@ -271,7 +271,7 @@ export default function GeneralVectorDatabase() {
                           onClick={handleXButton}
                         />
                       </div>
-                      <div className="flex-1 pl-4 pr-2 flex flex-col items-start gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px] provider-dropdown-list">
+                      <div className="flex-1 pl-4 pr-2 flex flex-col gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px] provider-dropdown-list">
                         {filteredVDBs.map((vdb) => (
                           <VectorDBItem
                             key={vdb.name}

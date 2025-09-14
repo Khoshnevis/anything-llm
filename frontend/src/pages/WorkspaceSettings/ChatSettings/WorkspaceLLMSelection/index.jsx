@@ -81,7 +81,7 @@ export default function WorkspaceLLMSelection({
         </p>
       </div>
 
-      <div className="relative">
+      <div className="relative provider-dropdown-container">
         <input type="hidden" name="chatProvider" value={selectedLLM} />
         {searchMenuOpen && (
           <div
@@ -90,20 +90,20 @@ export default function WorkspaceLLMSelection({
           />
         )}
         {searchMenuOpen ? (
-          <div className="absolute top-0 left-0 w-full max-w-[640px] max-h-[310px] min-h-[64px] bg-theme-settings-input-bg rounded-lg flex flex-col justify-between cursor-pointer border-2 border-primary-button z-20">
+          <div className="absolute top-0 left-0 w-full max-w-[640px] max-h-[310px] min-h-[64px] bg-theme-settings-input-bg rounded-lg flex flex-col justify-between cursor-pointer border-2 border-primary-button z-20 provider-dropdown-panel">
             <div className="w-full flex flex-col gap-y-1">
               <div className="flex items-center sticky top-0 z-10 border-b border-[#9CA3AF] mx-4 bg-theme-settings-input-bg">
                 <MagnifyingGlass
                   size={20}
                   weight="bold"
-                  className="absolute left-4 z-30 text-theme-text-primary -ml-4 my-2"
+                  className="absolute left-4 z-30 text-theme-text-primary -ml-4 my-2 provider-dropdown-search-icon"
                 />
                 <input
                   type="text"
                   name="llm-search"
                   autoComplete="off"
                   placeholder={t("chat.llm.search")}
-                  className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none focus:outline-primary-button active:outline-primary-button outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium"
+                  className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none focus:outline-primary-button active:outline-primary-button outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium provider-dropdown-search-input"
                   onChange={(e) => setSearchQuery(e.target.value)}
                   ref={searchInputRef}
                   onKeyDown={(e) => {
@@ -113,11 +113,11 @@ export default function WorkspaceLLMSelection({
                 <X
                   size={20}
                   weight="bold"
-                  className="cursor-pointer text-theme-text-primary hover:text-x-button"
+                  className="cursor-pointer text-theme-text-primary hover:text-x-button provider-dropdown-clear-icon"
                   onClick={handleXButton}
                 />
               </div>
-              <div className="flex-1 pl-4 pr-2 flex flex-col gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px]">
+              <div className="flex-1 pl-4 pr-2 flex flex-col gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px] provider-dropdown-list">
                 {filteredLLMs.map((llm) => {
                   return (
                     <WorkspaceLLMItem

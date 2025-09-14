@@ -252,6 +252,7 @@
 /* List items: flip row direction so logo sits on the right */
 [dir='rtl'] .provider-dropdown-item-row {
   flex-direction: row-reverse;
+  justify-content: flex-end !important; /* pack content to the right edge */
 }
 [dir='rtl'] .provider-dropdown-item-text {
   text-align: right;
@@ -261,13 +262,13 @@
 [dir='rtl'] .provider-dropdown-list {
   padding-left: 0.5rem; /* mirror pr-2 */
   padding-right: 1rem;  /* mirror pl-4 */
-  align-items: flex-end; /* flex-col container aligns items to the right */
+  align-items: stretch !important; /* let children span full width */
 }
 
-/* Item block should not stretch full width in RTL */
+/* Item should span full width even in RTL */
 [dir='rtl'] .provider-dropdown-item {
-  width: auto !important; /* override w-full */
-  align-self: flex-end;
+  width: 100% !important;
+  align-self: stretch !important;
 }
 
 /* Ensure image is on the far right and text next to it in RTL */
