@@ -13,31 +13,48 @@ import paths from "@/utils/paths";
 import { useTranslation } from "react-i18next";
 import { useSidebarToggle, ToggleSidebarButton } from "./SidebarToggle";
 import SearchBox from "./SearchBox";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 
 export default function Sidebar() {
   const { user } = useUser();
   const { logo } = useLogo();
   const sidebarRef = useRef(null);
   const { showSidebar, setShowSidebar, canToggleSidebar } = useSidebarToggle();
+  const isRtl =
+    typeof document !== "undefined" &&
+    document?.documentElement?.getAttribute("dir") === "rtl";
   const {
     showing: showingNewWsModal,
     showModal: showNewWsModal,
     hideModal: hideNewWsModal,
   } = useNewWorkspaceModal();
   const { t } = useTranslation();
+  const SIDEBAR_WIDTH = "clamp(260px, 22vw, 360px)";
 
   return (
     <>
       <div
         style={{
-          width: showSidebar ? "292px" : "0px",
-          paddingLeft: showSidebar ? "0px" : "16px",
+          // Outer width = inner width + margins (32px) + padding (20px) + border (4px)
+          width: showSidebar
+            ? `calc(${SIDEBAR_WIDTH} + 56px)`
+            : "0px",
+          ...(showSidebar
+            ? { paddingLeft: "0px", paddingRight: "0px" }
+            : isRtl
+            ? { paddingRight: "16px" }
+            : { paddingLeft: "16px" }),
         }}
-        className="transition-all duration-500"
+        className="relative z-[30] transition-all duration-500 overflow-hidden"
       >
-        <div className="flex shrink-0 w-full justify-center my-[18px]">
-          <div className="flex justify-between w-[250px] min-w-[250px]">
-            <Link to={paths.home()} aria-label="Home">
+        <div className="flex shrink-0 w-full justify-center my-[18px] px-[16px]">
+          <div
+            className={`flex items-center ${
+              isRtl ? "flex-row-reverse justify-between" : "justify-between"
+            }`}
+            style={{ width: SIDEBAR_WIDTH, minWidth: SIDEBAR_WIDTH }}
+          >
+            <Link to={paths.home()} aria-label="Home" className={`${isRtl ? "order-1" : "order-none"}`}>
               <img
                 src={logo}
                 alt="Logo"
@@ -45,16 +62,21 @@ export default function Sidebar() {
               />
             </Link>
             {canToggleSidebar && (
-              <ToggleSidebarButton
-                showSidebar={showSidebar}
-                setShowSidebar={setShowSidebar}
-              />
+              <div className={`${isRtl ? "order-none" : "order-1"}`}>
+                <ToggleSidebarButton
+                  showSidebar={showSidebar}
+                  setShowSidebar={setShowSidebar}
+                />
+              </div>
             )}
           </div>
         </div>
         <div
           ref={sidebarRef}
-          className="relative m-[16px] rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border light:border-none min-w-[250px] p-[10px] h-[calc(100%-76px)]"
+          className={`relative z-[30] rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border light:border-none p-[10px] h-[calc(100%-76px)] ${
+            showSidebar ? "m-[16px]" : "m-0"
+          }`}
+          style={{ width: SIDEBAR_WIDTH, minWidth: SIDEBAR_WIDTH }}
         >
           <div className="flex flex-col h-full overflow-x-hidden">
             <div className="flex-grow flex flex-col min-w-[235px]">
@@ -166,10 +188,7 @@ export function SidebarMobileHeader() {
             <div className="h-full flex flex-col w-full justify-between pt-4 ">
               <div className="h-auto md:sidebar-items">
                 <div className=" flex flex-col gap-y-4 overflow-y-scroll no-scroll pb-[60px]">
-                  <NewWorkspaceButton
-                    user={user}
-                    showNewWsModal={showNewWsModal}
-                  />
+                  <SearchBox user={user} showNewWsModal={showNewWsModal} />
                   <ActiveWorkspaces />
                 </div>
               </div>
@@ -182,24 +201,5 @@ export function SidebarMobileHeader() {
         {showingNewWsModal && <NewWorkspaceModal hideModal={hideNewWsModal} />}
       </div>
     </>
-  );
-}
-
-function NewWorkspaceButton({ user, showNewWsModal }) {
-  const { t } = useTranslation();
-  if (!!user && user?.role === "default") return null;
-
-  return (
-    <div className="flex gap-x-2 items-center justify-between">
-      <button
-        onClick={showNewWsModal}
-        className="flex flex-grow w-[75%] h-[44px] gap-x-2 py-[5px] px-4 bg-white rounded-lg text-sidebar justify-center items-center hover:bg-opacity-80 transition-all duration-300"
-      >
-        <Plus className="h-5 w-5" />
-        <p className="text-sidebar text-sm font-semibold">
-          {t("new-workspace.title")}
-        </p>
-      </button>
-    </div>
   );
 }
