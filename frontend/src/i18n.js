@@ -18,4 +18,17 @@ i18next
     },
   });
 
+// Set document direction based on current language and keep it updated on changes
+const setDocumentDirection = (lng) => {
+  const rtlLanguages = new Set(["ar", "fa"]);
+  const isRtl = rtlLanguages.has((lng || "en").split("-")[0]);
+  if (typeof document !== "undefined") {
+    document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
+    document.documentElement.setAttribute("lang", (lng || "en").split("-")[0]);
+  }
+};
+
+setDocumentDirection(i18next.language);
+i18next.on("languageChanged", setDocumentDirection);
+
 export default i18next;
