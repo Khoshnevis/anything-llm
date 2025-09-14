@@ -211,6 +211,12 @@
   color: var(--theme-text-primary);
 }
 
+/* RTL: Flip typical modal close button position */
+[dir='rtl'] .absolute.top-4.right-4 {
+  left: 1rem;
+  right: auto;
+}
+
 [data-theme="light"] .text-description,
 [data-theme="light"] .text-white\/60 {
   color: var(--theme-text-secondary);
