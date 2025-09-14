@@ -48,7 +48,7 @@ export default function PiperTTS({ chatId, voiceId = null, message }) {
   }, []);
 
   return (
-    <div className="mt-3 relative">
+    <div className="mt-3 relative chat-action">
       <button
         type="button"
         onClick={speakMessage}

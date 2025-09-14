@@ -222,6 +222,80 @@
   color: var(--theme-text-secondary);
 }
 
+/* RTL adjustments for provider dropdowns (LLM, Vector DB, Embedding, TTS, STT) */
+[dir='rtl'] .provider-dropdown-container {
+  direction: rtl;
+}
+
+/* Overlay panel: flip anchor to the right in RTL */
+[dir='rtl'] .provider-dropdown-panel {
+  left: auto !important;
+  right: 0 !important;
+  text-align: right;
+}
+
+/* Search icon/input alignment in RTL */
+[dir='rtl'] .provider-dropdown-search-icon {
+  left: auto !important;
+  right: 1rem !important; /* matches left-4 */
+  margin-left: 0 !important; /* cancel -ml-4 from utility */
+  margin-right: -1rem !important; /* mirror -ml-4 */
+}
+[dir='rtl'] .provider-dropdown-search-input {
+  padding-left: 1rem !important;
+  padding-right: 3rem !important; /* room for icon */
+  margin-left: 0 !important;
+  margin-right: -1rem !important; /* mirrors -ml-4 */
+  text-align: right;
+}
+
+/* List items: flip row direction so logo sits on the right */
+[dir='rtl'] .provider-dropdown-item-row {
+  flex-direction: row-reverse;
+}
+[dir='rtl'] .provider-dropdown-item-text {
+  text-align: right;
+}
+
+/* Scroll area padding/alignment for item list in RTL */
+[dir='rtl'] .provider-dropdown-list {
+  padding-left: 0.5rem; /* mirror pr-2 */
+  padding-right: 1rem;  /* mirror pl-4 */
+  align-items: flex-end; /* flex-col container aligns items to the right */
+}
+
+/* Item block should not stretch full width in RTL */
+[dir='rtl'] .provider-dropdown-item {
+  width: auto !important; /* override w-full */
+  align-self: flex-end;
+}
+
+/* Ensure image is on the far right and text next to it in RTL */
+[dir='rtl'] .provider-dropdown-item-row > img {
+  order: 2;
+  margin-left: 0;
+  margin-right: 1rem; /* mirrors gap */
+}
+[dir='rtl'] .provider-dropdown-item-row > .provider-dropdown-item-text {
+  order: 1;
+}
+
+/* Scroll area padding/alignment for item list in RTL */
+[dir='rtl'] .provider-dropdown-list {
+  padding-left: 0.5rem !important; /* mirror pr-2 */
+  padding-right: 1rem !important;  /* mirror pl-4 */
+  align-items: flex-end;            /* flex-col container aligns items to right */
+}
+
+/* Place clear (X) icon to the left in RTL to avoid overlapping magnifier */
+[dir='rtl'] .provider-dropdown-clear-icon {
+  position: absolute;
+  left: 1rem;
+  right: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 [data-theme="light"] .bg-theme-bg-secondary {
   border: 1px solid var(--theme-sidebar-border);
 }
@@ -1032,6 +1106,20 @@ does not extend the close button beyond the viewport. */
 [data-theme="light"] .search-input::-webkit-search-cancel-button {
   filter: grayscale(100%) invert(0) brightness(0) opacity(0.5);
 }
+
+/* Prevent overlap of assistant action icons and message text in RTL on single-line messages */
+[dir='rtl'] .chat-actions-row {
+  /* push actions away from message bubble when assistant is right-aligned */
+  margin-right: 3.5rem; /* mirrors ml-14 used for avatar column spacing */
+  margin-left: 0;
+}
+
+/* Slightly raise action icons for single-line messages in RTL */
+[dir='rtl'] .chat-action {
+  margin-top: 0.125rem; /* a touch closer to align with one-line text */
+}
+
+/* Removed chat-tts adjustments: TTS moved into actions row */
 
 .animate-remove {
   animation: fadeAndShrink 800ms forwards;

@@ -136,7 +136,7 @@ export default function TextToSpeechProvider({ settings }) {
           )}
         </div>
         <div className="text-base font-bold text-white mt-6 mb-4">Provider</div>
-        <div className="relative">
+        <div className="relative provider-dropdown-container">
           {searchMenuOpen && (
             <div
               className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 backdrop-blur-sm z-10"
@@ -144,20 +144,20 @@ export default function TextToSpeechProvider({ settings }) {
             />
           )}
           {searchMenuOpen ? (
-            <div className="absolute top-0 left-0 w-full max-w-[640px] max-h-[310px] min-h-[64px] bg-theme-settings-input-bg rounded-lg flex flex-col justify-between cursor-pointer border-2 border-primary-button z-20">
+            <div className="absolute top-0 left-0 w-full max-w-[640px] max-h-[310px] min-h-[64px] bg-theme-settings-input-bg rounded-lg flex flex-col justify-between cursor-pointer border-2 border-primary-button z-20 provider-dropdown-panel">
               <div className="w-full flex flex-col gap-y-1">
                 <div className="flex items-center sticky top-0 z-10 border-b border-[#9CA3AF] mx-4 bg-theme-settings-input-bg">
                   <MagnifyingGlass
                     size={20}
                     weight="bold"
-                    className="absolute left-4 z-30 text-theme-text-primary -ml-4 my-2"
+                    className="absolute left-4 z-30 text-theme-text-primary -ml-4 my-2 provider-dropdown-search-icon"
                   />
                   <input
                     type="text"
                     name="tts-provider-search"
                     autoComplete="off"
                     placeholder="Search text to speech providers"
-                    className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium"
+                    className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium provider-dropdown-search-input"
                     onChange={(e) => setSearchQuery(e.target.value)}
                     ref={searchInputRef}
                     onKeyDown={(e) => {
@@ -167,11 +167,11 @@ export default function TextToSpeechProvider({ settings }) {
                   <X
                     size={20}
                     weight="bold"
-                    className="cursor-pointer text-white hover:text-x-button"
+                    className="cursor-pointer text-white hover:text-x-button provider-dropdown-clear-icon"
                     onClick={handleXButton}
                   />
                 </div>
-                <div className="flex-1 pl-4 pr-2 flex flex-col gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px]">
+                <div className="flex-1 pl-4 pr-2 flex flex-col items-start gap-y-1 overflow-y-auto white-scrollbar pb-4 max-h-[245px] provider-dropdown-list">
                   {filteredProviders.map((provider) => (
                     <LLMItem
                       key={provider.name}
@@ -192,13 +192,13 @@ export default function TextToSpeechProvider({ settings }) {
               type="button"
               onClick={() => setSearchMenuOpen(true)}
             >
-              <div className="flex gap-x-4 items-center">
+              <div className="flex gap-x-4 items-center provider-dropdown-item-row">
                 <img
                   src={selectedProviderObject.logo}
                   alt={`${selectedProviderObject.name} logo`}
                   className="w-10 h-10 rounded-md"
                 />
-                <div className="flex flex-col text-left">
+                <div className="flex flex-col text-left provider-dropdown-item-text">
                   <div className="text-sm font-semibold text-white">
                     {selectedProviderObject.name}
                   </div>

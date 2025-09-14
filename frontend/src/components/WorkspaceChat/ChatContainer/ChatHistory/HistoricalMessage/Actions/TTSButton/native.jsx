@@ -33,7 +33,7 @@ export default function NativeTTSMessage({ chatId, message }) {
 
   if (!supported) return null;
   return (
-    <div className="mt-3 relative">
+    <div className="mt-3 relative chat-action">
       <button
         onClick={speakMessage}
         data-auto-play-chat-id={chatId}

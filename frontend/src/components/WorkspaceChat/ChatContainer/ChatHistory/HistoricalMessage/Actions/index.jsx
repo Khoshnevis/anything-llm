@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import useCopyText from "@/hooks/useCopyText";
 import { Check, ThumbsUp, ArrowsClockwise, Copy } from "@phosphor-icons/react";
+import TTSMessage from "./TTSButton";
 import Workspace from "@/models/workspace";
 import { EditMessageAction } from "./EditMessage";
 import RenderMetrics from "./RenderMetrics";
@@ -32,8 +33,11 @@ const Actions = ({
   return (
     <div className={`flex w-full justify-between items-center ${alignmentCls}`}>
       <div className="flex justify-start items-center gap-x-[8px]">
+        {role === "assistant" && (
+          <TTSMessage slug={slug} chatId={chatId} message={message} />
+        )}
         <CopyMessage message={message} />
-        <div className="md:group-hover:opacity-100 transition-all duration-300 md:opacity-0 flex justify-start items-center gap-x-[8px]">
+        <div className="group-hover:opacity-100 transition-all duration-300 opacity-0 flex justify-start items-center gap-x-[8px]">
           <EditMessageAction
             chatId={chatId}
             role={role}
@@ -75,7 +79,7 @@ function FeedbackButton({
   IconComponent,
 }) {
   return (
-    <div className="mt-3 relative">
+    <div className="mt-3 relative chat-action">
       <button
         onClick={handleFeedback}
         data-tooltip-id="feedback-button"
@@ -100,7 +104,7 @@ function CopyMessage({ message }) {
 
   return (
     <>
-      <div className="mt-3 relative">
+      <div className="mt-3 relative chat-action">
         <button
           onClick={() => copyText(message)}
           data-tooltip-id="copy-assistant-text"
@@ -131,7 +135,7 @@ function RegenerateMessage({ regenerateMessage, chatId }) {
   if (!chatId) return null;
   const { t } = useTranslation();
   return (
-    <div className="mt-3 relative">
+    <div className="mt-3 relative chat-action">
       <button
         onClick={() => regenerateMessage(chatId)}
         data-tooltip-id="regenerate-assistant-text"

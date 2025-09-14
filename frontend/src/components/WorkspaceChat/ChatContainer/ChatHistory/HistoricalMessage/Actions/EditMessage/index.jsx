@@ -40,11 +40,7 @@ export function EditMessageAction({ chatId = null, role, isEditing }) {
 
   if (!chatId || isEditing) return null;
   return (
-    <div
-      className={`mt-3 relative ${
-        role === "user" && !isEditing ? "" : "!opacity-100"
-      }`}
-    >
+    <div className={"mt-3 relative chat-action"}>
       <button
         onClick={handleEditClick}
         data-tooltip-id="edit-input-text"
@@ -58,7 +54,7 @@ export function EditMessageAction({ chatId = null, role, isEditing }) {
       >
         <Pencil
           color="var(--theme-sidebar-footer-icon-fill)"
-          size={21}
+          size={20}
           className="mb-1"
         />
       </button>

@@ -91,15 +91,6 @@ const HistoricalMessage = ({
         <div className={`flex gap-x-5 ${alignmentCls}`}>
           <div className="flex flex-col items-center">
             <ProfileImage role={role} workspace={workspace} />
-            <div className="mt-1 -mb-10">
-              {role === "assistant" && (
-                <TTSMessage
-                  slug={workspace?.slug}
-                  chatId={chatId}
-                  message={message}
-                />
-              )}
-            </div>
           </div>
           {isEditing ? (
             <EditMessageForm
@@ -137,7 +128,7 @@ const HistoricalMessage = ({
             </div>
           )}
         </div>
-        <div className="flex gap-x-5 ml-14">
+        <div className="flex gap-x-5 ml-14 chat-actions-row">
           <Actions
             message={message}
             feedbackScore={feedbackScore}
