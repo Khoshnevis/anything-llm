@@ -6,6 +6,7 @@ import { CaretUpDown, MagnifyingGlass, X } from "@phosphor-icons/react";
 import CTAButton from "@/components/lib/CTAButton";
 import AnythingLLMIcon from "@/media/logo/anything-llm-icon.png";
 import BrowserNative from "@/components/SpeechToText/BrowserNative";
+import { useTranslation } from "react-i18next";
 
 const PROVIDERS = [
   {
@@ -18,6 +19,7 @@ const PROVIDERS = [
 ];
 
 export default function SpeechToTextProvider({ settings }) {
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -80,14 +82,11 @@ export default function SpeechToTextProvider({ settings }) {
         <div className="w-full flex flex-col gap-y-1 pb-6 border-white light:border-theme-sidebar-border border-b-2 border-opacity-10">
           <div className="flex gap-x-4 items-center">
             <p className="text-lg leading-6 font-bold text-white">
-              Speech-to-text Preference
+              {t("settings.audio.stt.title")}
             </p>
           </div>
           <p className="text-xs leading-[18px] font-base text-white text-opacity-60">
-            Here you can specify what kind of text-to-speech and speech-to-text
-            providers you would want to use in your AnythingLLM experience. By
-            default, we use the browser's built in support for these services,
-            but you may want to use others.
+            {t("settings.audio.stt.description")}
           </p>
         </div>
         <div className="w-full justify-end flex">
@@ -96,11 +95,11 @@ export default function SpeechToTextProvider({ settings }) {
               onClick={() => handleSubmit()}
               className="mt-3 mr-0 -mb-14 z-10"
             >
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? t("common.saving") : t("common.save")}
             </CTAButton>
           )}
         </div>
-        <div className="text-base font-bold text-white mt-6 mb-4">Provider</div>
+        <div className="text-base font-bold text-white mt-6 mb-4">{t("settings.audio.stt.provider")}</div>
         <div className="relative provider-dropdown-container">
           {searchMenuOpen && (
             <div
@@ -121,7 +120,7 @@ export default function SpeechToTextProvider({ settings }) {
                     type="text"
                     name="stt-provider-search"
                     autoComplete="off"
-                    placeholder="Search speech to text providers"
+                    placeholder={t("common.search")}
                     className="border-none -ml-4 my-2 bg-transparent z-20 pl-12 h-[38px] w-full px-4 py-1 text-sm outline-none text-theme-text-primary placeholder:text-theme-text-primary placeholder:font-medium provider-dropdown-search-input"
                     onChange={(e) => setSearchQuery(e.target.value)}
                     ref={searchInputRef}

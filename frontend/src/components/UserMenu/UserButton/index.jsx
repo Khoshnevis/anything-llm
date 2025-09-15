@@ -43,15 +43,8 @@ export default function UserButton() {
   }, [showMenu]);
 
   useEffect(() => {
-    const fetchSupportEmail = async () => {
-      const supportEmail = await System.fetchSupportEmail();
-      setSupportEmail(
-        supportEmail?.email
-          ? `mailto:${supportEmail.email}`
-          : paths.mailToMintplex()
-      );
-    };
-    fetchSupportEmail();
+    // Email support links are disabled per branding policy
+    setSupportEmail("");
   }, []);
 
   if (mode === null) return null;
@@ -80,12 +73,7 @@ export default function UserButton() {
                 {t("profile_settings.account")}
               </button>
             )}
-            <a
-              href={supportEmail}
-              className="text-white hover:bg-theme-action-menu-item-hover w-full text-left px-4 py-1.5 rounded-md"
-            >
-              {t("profile_settings.support")}
-            </a>
+            {/* Support email removed */}
             <button
               onClick={() => {
                 window.localStorage.removeItem(AUTH_USER);

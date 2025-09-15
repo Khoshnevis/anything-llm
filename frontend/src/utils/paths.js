@@ -50,7 +50,7 @@ export default {
     },
   },
   github: () => {
-    return "https://github.com/Mintplex-Labs/anything-llm";
+    return "https://github.com/xehnai/anything-llm";
   },
   discord: () => {
     return "https://discord.com/invite/6UyHPeGZAC";
@@ -62,10 +62,10 @@ export default {
     return "https://docs.anythingllm.com/features/chat-modes";
   },
   mailToMintplex: () => {
-    return "mailto:team@mintplexlabs.com";
+    return "";
   },
   hosting: () => {
-    return "https://my.mintplexlabs.com/aio-checkout?product=anythingllm";
+    return "https://xehnai.com";
   },
   workspace: {
     chat: (slug, options = {}) => {

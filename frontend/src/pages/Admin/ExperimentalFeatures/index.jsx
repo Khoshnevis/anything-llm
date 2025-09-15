@@ -265,13 +265,7 @@ function FeatureVerification({ children }) {
                     >
                       docs.anythingllm.com
                     </a>{" "}
-                    or email{" "}
-                    <a
-                      href="mailto:team@mintplexlabs.com"
-                      className="underline text-blue-500"
-                    >
-                      team@mintplexlabs.com
-                    </a>
+                    .
                   </p>
                 </div>
               </div>
