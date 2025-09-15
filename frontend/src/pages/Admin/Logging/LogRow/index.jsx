@@ -38,25 +38,20 @@ export default function LogRow({ log }) {
         <td className="px-6 border-transparent transform transition-transform duration-200">
           {log.occurredAt}
         </td>
-        {hasMetadata && (
-          <div className="mt-1">
-            {expanded ? (
-              <td
-                className={`px-2 gap-x-1 flex items-center justify-center transform transition-transform duration-200`}
-              >
+        <td className={`px-2 transform transition-transform duration-200`}>
+          {hasMetadata && (
+            <div className="flex items-center justify-center gap-x-1">
+              {expanded ? (
                 <CaretUp weight="bold" size={20} />
-                <p className="text-xs text-white/50 w-[20px]">hide</p>
-              </td>
-            ) : (
-              <td
-                className={`px-2 gap-x-1 flex items-center justify-center transform transition-transform duration-200`}
-              >
+              ) : (
                 <CaretDown weight="bold" size={20} />
-                <p className="text-xs text-white/50 w-[20px]">show</p>
-              </td>
-            )}
-          </div>
-        )}
+              )}
+              <p className="text-xs text-white/50 w-[20px]">
+                {expanded ? "hide" : "show"}
+              </p>
+            </div>
+          )}
+        </td>
       </tr>
       <EventMetadata metadata={metadata} expanded={expanded} />
     </>
@@ -67,17 +62,10 @@ const EventMetadata = ({ metadata, expanded = false }) => {
   if (!metadata || !expanded) return null;
   return (
     <tr className="bg-theme-bg-primary">
-      <td
-        colSpan="2"
-        className="px-6 py-4 font-medium text-theme-text-primary rounded-l-2xl"
-      >
-        Event Metadata
-      </td>
-      <td colSpan="4" className="px-6 py-4 rounded-r-2xl">
+      <td colSpan="4" className="px-6 py-4 rounded-2xl">
         <div className="w-full rounded-lg bg-theme-bg-secondary p-2 text-white shadow-sm border-white/10 border bg-opacity-10">
-          <pre className="overflow-scroll">
-            {JSON.stringify(metadata, null, 2)}
-          </pre>
+          <p className="px-0 py-2 font-medium text-theme-text-primary">Event Metadata</p>
+          <pre className="overflow-scroll">{JSON.stringify(metadata, null, 2)}</pre>
         </div>
       </td>
     </tr>
@@ -106,7 +94,7 @@ const EventBadge = ({ event }) => {
     };
 
   return (
-    <td className="px-6 py-2 font-medium whitespace-nowrap text-white flex items-center">
+    <td className="px-6 py-2 font-medium whitespace-nowrap text-white">
       <span
         className={`rounded-full ${colorTheme.bg} px-2 py-0.5 text-xs font-medium ${colorTheme.text} shadow-sm`}
       >
