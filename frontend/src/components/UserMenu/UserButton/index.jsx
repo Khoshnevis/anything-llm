@@ -49,7 +49,7 @@ export default function UserButton() {
 
   if (mode === null) return null;
   return (
-    <div className="absolute top-3 right-4 md:top-9 md:right-10 w-fit h-fit z-40">
+    <div className="absolute top-3 right-4 md:top-9 md:right-10 w-fit h-fit z-40 user-button-anchor">
       <button
         ref={buttonRef}
         onClick={() => setShowMenu(!showMenu)}
@@ -62,7 +62,7 @@ export default function UserButton() {
       {showMenu && (
         <div
           ref={menuRef}
-          className="w-fit rounded-lg absolute top-12 right-0 bg-theme-action-menu-bg p-2 flex items-center-justify-center"
+          className="w-fit rounded-lg absolute top-12 right-0 bg-theme-action-menu-bg p-2 flex items-center-justify-center user-menu-panel"
         >
           <div className="flex flex-col gap-y-2">
             {mode === "multi" && !!user && (

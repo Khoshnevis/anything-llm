@@ -217,6 +217,26 @@
   right: auto;
 }
 
+/* RTL: Keep user avatar button anchored to the left side */
+[dir='rtl'] .user-button-anchor {
+  left: 1rem; /* mirrors right-4 */
+  right: auto !important;
+}
+
+/* RTL (md+): mirror md:right-10 to md:left-10 */
+@media (min-width: 768px) {
+  [dir='rtl'] .user-button-anchor.md\:right-10 {
+    left: 2.5rem; /* 10 => 2.5rem */
+    right: auto !important;
+  }
+}
+
+/* RTL: dropdown menu should open aligned to the left of the button */
+[dir='rtl'] .user-menu-panel {
+  left: 0;
+  right: auto !important;
+}
+
 [data-theme="light"] .text-description,
 [data-theme="light"] .text-white\/60 {
   color: var(--theme-text-secondary);
